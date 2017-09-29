@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+<script src="script.js"></script>
+<link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <h2 id="start" >Feature phone Demo Module</h2>
+    <div id="page" >
+    </div>
+    <div  id="rooms" style="">
+    </div>
+    <div style="">
+    <div id="bottom" style="float:right" >
+      </div>
+      <div id="bottom1" style="float:left">
+    </div>
+    
+    </div><br><br><br><br>
+    <textarea id="field2" style="display:none; margin-top: 10px;" cols="70"
+></textarea>
+ <button onclick="field2.style.display='block'; field2.innerHTML =JSON.stringify(result)">result
+</button>
+    <script>
+ 
+  
+  
+ var result={
+    "user": "8ya",
+    "date": "2014-03-27 14:33",
+    "answers": []
+        
+} 
+
+
+
+
+var bobj={};
+var rout={};
+
+for(let key1 in rom.questions){
+  rout[rom.questions[key1].id]=key1;
+};
+
+const vv=(v)=>{
+let divp = document.createElement('span');
+divp.innerHTML ="V";
+divp.id=v;
+divp.style.position="absolute";
+divp.style.display="none"
+document.body.appendChild(divp);
+};
+
+vv("v");
+
+const st=rom.questions.filter(el=>el.start)[0].id;
+//start.innerHTML =JSON.stringify(rout);
+const valid=(value)=>{
+if(value.input==="checkbox"){
+value.value=Object.keys(value.value); 
+
+}//if
+
+return value;
+};
+
+const nextr=(arr)=>arr.map(el=>next1(el));
+
+const next1=(obj)=>{
+ // field2.innerHTML = JSON.stringify(obj);
+//rooms.innerHTML =""; 
+//obj.validates&&alert(JSON.stringify(obj.validates));
+let divp = document.createElement('span');
+divp.innerHTML =obj.id;
+bottom1.innerHTML ='<span class="spage">this page</span>'//page
+bottom1.appendChild(divp);
+
+let divp3 = document.createElement('span');
+divp3.innerHTML =obj.description;
+divp3.id="description";
+page.appendChild(divp3);
+
+let title=document.createElement("h4");
+title.innerHTML =obj.title;
+
+rooms.appendChild(title);
+
+ bobj={
+ "input":obj.input,
+ "id":obj.id ,
+ "value":{}
+}
+
+obj.variants&&varin(obj.variants)
+  
+ let divp1 = document.createElement('button');
+divp1.innerHTML =obj.next;
+if(obj.input==="router"){
+ divp1.innerHTML =obj.id;
+ divp1.id="rou";
+}
+if(obj.finish=== true){
+ divp1.innerHTML ="end"; 
+}//if 
+
+ divp1.onclick=function() {
+  bobj=valid(bobj);
+  obj.datatype==="integer" ? bobj.value=integ.value :"";
+ 
+  
+if(bobj.value.length) {
+  delete bobj.input;
+result.answers.push(bobj)
+ 
+
+v.style.display="none";
+rooms.innerHTML ="";
+page.innerHTML ="";
+bottom.innerHTML ="";
+bottom1.innerHTML ="";
+
+if(divp1.innerHTML !=="end"){
+  next1(rom.questions[rout[this.innerHTML]]) ;
+}//if 
+else{
+ //alert(new Date);
+ result.date=new Date;
+ 
+bottom1.innerHTML ="<h2>Thank you!</h2>"; 
+console.log(result);
+//socket.emit("result",result);
+}//else
+}else{
+ alert("выберите!")
+}//else push
+}
+
+//alert ("hh")
+bottom.innerHTML ="<span>next page</span>";
+bottom.appendChild(divp1);
+if(obj.datatype==="integer"){
+ let divp = document.createElement("div");
+ let vmin="0";
+ let vmax="50";
+ let vval=vmin
+obj.validates ?  vmin=obj.validates.numericality.min : vmin=obj.min;
+obj.validates ?  vmax=obj.validates.numericality.max : vmax=obj.max;
+typeof obj.value =="number" ? vval=obj.value : vval=vmin;
+ divp.innerHTML ='<input id="integ" type="number" name="myInput" value="'+vval+'" min="'+vmin+'" max="'+vmax+'" step="1" onkeydown="return false">';
+
+ 
+ rooms.appendChild(divp);
+}//if
+
+
+
+}//next1
+const varin=(arr1)=>{
+  arr1.map(el=>{
+ //el.validates&&alert(JSON.stringify(obj.validates));   
+ let divp = document.createElement('p');
+ divp.id=el.next;
+// divp.onclick=alert(divp.id);
+ divp.innerHTML =el.title;
+ divp.onclick=click;
+
+ rooms.appendChild(divp);
+ })
+};
+
+const click=(e)=>{
+//e.target.style.color==="red"&&bobj.input==="radio" ? e.target.style.color="" : rooms.style.color=""; 
+if(bobj.input==="checkbox"){
+e.target.style.color==="red" ? e.target.style.color="" : e.target.style.color="red";
+
+}//if  
+if(bobj.input==="radio"||bobj.input==="router"){
+v.style.display="block";
+v.style.left=37+"px";
+v.style.top=e.pageY-9+"px";
+bobj.input==="router" ? rou.innerHTML =e.target.id :"";
+//e.target.tagName==="P" ? rooms.appendChild(document.getElementById("v")) : "";
+}//if
+  
+  create(e.target.innerHTML)
+ 
+   };
+   
+const create=(value)=>{
+value=value+[]  
+ 
+ if(bobj.input==="checkbox") {
+ bobj.value[value]==="1" ? delete bobj.value[value] : bobj.value[value]="1"; 
+ //alert(JSON.stringify(bobj.value[value]));
+  }//if
+  
+if(bobj.input==='radio'||bobj.input==="router"){
+ bobj[value] ? delete bobj[value] : bobj.value=value ;
+  
+}//if
+  
+
+}
+next1(rom.questions[rout[st]]);
+    </script>
+  </body>
+
+</html>
